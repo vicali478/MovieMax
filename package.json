@@ -1,0 +1,45 @@
+{
+  "name": "moviemax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo",
+    "migrate:undo:all": "sequelize db:migrate:undo:all",
+    "migrate:create": "sequelize migration:create --name"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ngrok/ngrok": "^1.5.1",
+    "axios": "^1.9.0",
+    "axios-cookiejar-support": "^6.0.2",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "fflate": "^0.8.2",
+    "geoip-lite": "^1.4.10",
+    "http-proxy": "^1.18.1",
+    "https-proxy-agent": "^7.0.6",
+    "mysql2": "^3.14.1",
+    "nedb-promises": "^6.2.3",
+    "node-zstandard": "^1.2.4",
+    "qs": "^6.14.0",
+    "save": "^2.9.0",
+    "sequelize": "^6.37.7",
+    "simple-zstd": "^1.4.2",
+    "slugify": "^1.6.6",
+    "tough-cookie": "^5.1.2",
+    "yt-stream": "^1.7.4",
+    "ytdl-core": "^4.11.5",
+    "zstddec": "^0.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.6.1",
+    "nodemon": "^3.1.10",
+    "sequelize-cli": "^6.6.3"
+  }
+}
