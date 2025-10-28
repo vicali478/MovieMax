@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DramaSpot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1124&q=100');
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: white;
+      user-select: none;
+    }
+
+    .movie-details h1 {
+      font-size: 32px;
+      margin: 0;
+      background: linear-gradient(90deg, #f80764 0%, #ff6f00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .movie-details p {
+      margin: 10px 0;
+    }
+
+    .trailers1 {
+      height: 600px;
+      border: solid;
+      width: 30%;
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      overflow-x: hidden;
+      align-items: center;
+      overflow-y: scroll;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.94);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+
+    .trailers1::-webkit-scrollbar,
+    .trailers::-webkit-scrollbar,
+    .casts::-webkit-scrollbar {
+      display: none;
+    }
+
+    .trailers {
+      width: 100%;
+      display: none;
+      gap: 10px;
+      flex-direction: row;
+      overflow-x: scroll;
+      justify-content: space-evenly;
+    }
+
+    .casts {
+      width: 100%;
+      justify-content: space-evenly;
+      display: flex;
+      gap: 10px;
+      flex-direction: row;
+      overflow-x: scroll;
+    }
+
+    .trailer-card {
+      flex-shrink: 0;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.64);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      padding-top: 5px;
+      text-align: center;
+    }
+
+    .cast-card img {
+      flex-shrink: 0;
+      height: 200px;
+      width: auto;
+      background-color: #1c1c1c;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .cast-card p {
+      width: 100%;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+
+
+    .buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      height: 80px;
+      align-items: center;
+    }
+
+    .buttons button {
+      padding: 12px 20px;
+      width: 140px;
+      height: 45px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(90deg, #f80764 0%, #ff6f00 100%);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(248, 7, 100, 0.3);
+    }
+
+    .buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(248, 7, 100, 0.4);
+    }
+
+    .trailer-card button:hover {
+      background-color: #ffc107;
+    }
+
+    .cast {
+      margin-top: 10px;
+    }
+
+    .cast img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 10px;
+    }
+
+    .described {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      padding: 20px;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(1, 2, 4, 0.89);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .top {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+    .viewer {
+      width: 800px;
+      position: relative;
+    }
+
+    .stream-video {
+      width: 100%;
+      height: 455px;
+    }
+
+    .described img {
+      padding: 0px 10px;
+      width: 300px;
+      height: 455px;
+    }
+
+    p {
+      color: rgb(178, 180, 180);
+    }
+
+    strong {
+      color: white;
+    }
+
+    .title1 {
+      display: block;
+    }
+
+    .title2 {
+      display: none;
+    }
+
+    .trailer-title {
+      display: none;
+    }
+
+    .movie-details {
+      padding: 10px;
+    }
+
+    .cover {
+      display: flex;
+      height: 445px;
+      justify-content: center;
+      align-items: start;
+    }
+
+    .trailer-card {
+      width: 250px;
+      /* or whatever height you want */
+      height: auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+.trailer-thumbnail {
+  width: 98%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+    .trailer-card p {
+      font-size: 14px;
+      width: 250px;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 768px) {
+
+      .described,
+      .movie-details {
+        padding: 5px;
+      }
+
+      .trailer-title {
+        display: block;
+      }
+
+      .viewer {
+        width: 100%;
+      }
+
+      .cover {
+        height: 200px;
+      }
+
+      .buttons {
+        height: 60px;
+      }
+
+      .buttons button {
+        width: 140px;
+        height: 40px;
+      }
+
+      .trailer-card p {
+        font-size: 12px;
+        width: 220px;
+        text-align: center;
+      }
+
+      .movie-details h1 {
+        font-size: 20px;
+      }
+
+      .trailers {
+        display: flex;
+      }
+
+      .trailers1 {
+        display: none;
+      }
+
+      .title2 {
+        display: block;
+      }
+
+      .title1 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        padding: 0;
+      }
+
+      .top {
+        flex-direction: column;
+      }
+
+      .described {
+        flex-direction: row;
+      }
+
+      .described img {
+        padding: 5px;
+        width: 120px;
+        height: auto;
+      }
+
+      .movie-details p {
+        font-size: 14px;
+      }
+
+      .stream-video {
+        height: 220px;
+      }
+    }
+
+    i {
+      color: orange;
+    }
+
+    .trailers1 .span {
+      color: gray;
+      font-size: 18px;
+      font-weight: bold;
+      padding-top: 10px;
+    }
+
+    .movie-backdrop {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .movie-backdrop::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 72px;
+      color: #fff;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .movie-backdrop:hover .play-button {
+      opacity: 1;
+    }
+
+    @media (min-width: 768px) {
+      .movie-backdrop {
+        height: 370px;
+      }
+    }
+
+    .download-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      z-index: 10;
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s;
+    }
+
+    .download-btn:hover {
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="main-content">
+      <h1 id="movie-title2" class="title1"></h1>
+      <div class="top">
+        <div class="viewer">
+          <button class="download-btn" onclick="downloadTrailer()">Download</button>
+          <div id="videoPlaceholder" class="movie-backdrop" role="button" aria-label="Play Trailer">
+            <svg id="play-button" class="play-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="72"
+              height="72" fill="currentColor">
+              <path d="M16 12v40l36-20z" />
+            </svg>
+          </div>
+
+        </div>
+
+        <div class="described">
+          <img id="movie-poster" />
+          <div class="movie-details">
+            <h1 id="movie-title" class="title2">...</h1>
+            <p id="director">...</p>
+            <p id="release-date">...</p>
+            <p id="genres">...</p>
+            <p id="imdb-rating">...</p>
+          </div>
+        </div>
+
+        <div id="trailers1" class="trailers1">
+          <span class="span">Trailers</span>
+        </div>
+      </div>
+
+      <h3 style="padding: 5px;">Description</h3>
+      <p id="description" style="padding: 5px;"></p>
+
+      <h2 style="padding: 5px;" class="trailer-title">Trailers</h2>
+      <div id="trailers" class="trailers"></div>
+
+      <h2 style="padding: 5px;">Top Cast</h2>
+      <div id="cast" class="casts"></div>
+
+      <h2 style="padding: 5px;">Crew</h2>
+      <div id="crew" class="casts"></div>
+    </div>
+  </div>
+
+  <script src="details.js"></script>
+</body>
+
+</html>
